@@ -1,0 +1,31 @@
+header {
+    width: auto;
+}
+
+.header-content {
+    display: flex;
+    background-color: #29a6e0;
+    background-image: linear-gradient(to bottom right,#29a6e0, #c4eafc);    
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    margin-bottom: 0;
+}
+
+.header-content .header {
+    font-size: 4.6rem;
+    font-family: Roboto;
+    font-weight: 900;
+    color: whitesmoke;
+    transition: 0.4s;
+}
+
+.header-content .header:hover {
+    color: gainsboro;
+    opacity: 80%;
+    
+}
+
+.header-content .header img {
+    width: 4.6rem;
+}
