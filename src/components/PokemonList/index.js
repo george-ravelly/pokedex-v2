@@ -38,7 +38,7 @@ function PokemonList() {
                         <div className="car-body">
                             <p className="card-title m-2 text-capitalize">
                                 {pokemon.pokemon_species.name}<br />
-                                <Link className="text-info" to="/pokemon/id">info...</Link>
+                                <Link className="text-info" to={`/pokemon?name=${pokemon.pokemon_species.name}`}>info...</Link>
                             </p>
                         </div>
                     </div>

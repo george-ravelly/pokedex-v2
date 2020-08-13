@@ -15,7 +15,8 @@ const PokemonSprite = (props) => {
                 }else {
                     setSprite(data.sprites.front_default);
                 }                
-            })
+            }
+        )
     }, [name])
     return(
         <div className="sprite-content">

@@ -1,0 +1,37 @@
+:root {
+    --color-fire: rgb(224, 52, 52);
+    
+    --color-grass: rgb(86, 245, 71);
+    
+    --color-water:  lightseagreen;
+
+    --color-normal: grey;
+
+    --color-fighter: orangered;
+
+    --color-flying: rgb(166, 215, 248);
+
+    --color-ground: rgb(194, 140, 23);
+
+    --color-rock: rgba(255, 222, 113, 0.671);
+
+    --color-bug: greenyellow;
+
+    --color-ghost: rgb(141, 115, 141);
+
+    --color-ice: rgb(91, 161, 204);
+
+    --color-steel: lightsteelblue;
+
+    --color-electric: gold;
+
+    --color-fairy: lightpink;
+
+    --color-dragon: rgb(39, 93, 243);
+
+    --color-psychic: lightcoral;
+
+    --color-dark: rgb(49, 45, 45);
+    
+    --color-poison: purple;
+}
