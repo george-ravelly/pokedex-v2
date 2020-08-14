@@ -40,7 +40,9 @@ function Home() {
                     {pokemonList.map(pokemon => (
                         <div className="col-4 d-flex justify-content-center" key={pokemon.name}>
                             <Link className="text-decoration-none" to={`/pokemon/${pokemon.name}`}>
-                                <PokemonSprite name={pokemon.name}/><br />
+                                <div style={{width: '175px', height: '175px'}}>
+                                    <PokemonSprite url={pokemon.url}/><br />
+                                </div>
                                 <strong className="p-4 text-capitalize" style={{fontSize: '1.6rem'}}>
                                     {pokemon.name}
                                 </strong>

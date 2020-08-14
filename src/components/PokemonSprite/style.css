@@ -1,14 +1,9 @@
-.sprite-content {
-    width: 150px;
-    height: 150px;
-}
-
-.sprite-content .sprite {
+.sprite {
     width: 100%;
     height: 100%;
     transition: 0.2s;
 }
 
-.sprite-content .sprite:hover{
+.sprite:hover{
     opacity: 80%;
 }

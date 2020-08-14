@@ -16,8 +16,7 @@ function PokemonList() {
             setPokedex(response.data);
             setPokemonList(response.data.pokemon_entries)
         })
-        
-    )}, [pokemonList, dex]);
+    )}, [dex]);
 
     return(
         <section className="container bg-light mt-2 p-4 list-pokemon rounded" >
@@ -34,11 +33,13 @@ function PokemonList() {
                         className="d-flex justify-content-around col-3 mb-5 pokemon-list" 
                         key={pokemon.pokemon_species.name}
                     >
-                        <PokemonSprite name={pokemon.pokemon_species.name} />
+                        <div style={{width: '5rem', height: '5rem'}}>
+                            <PokemonSprite url={pokemon.pokemon_species.url}/><br />
+                        </div>
                         <div className="car-body">
                             <p className="card-title m-2 text-capitalize">
                                 {pokemon.pokemon_species.name}<br />
-                                <Link className="text-info" to={`/pokemon?name=${pokemon.pokemon_species.name}`}>info...</Link>
+                                <Link className="text-info" to={`/pokemon/${pokemon.pokemon_species.name}`}>info...</Link>
                             </p>
                         </div>
                     </div>

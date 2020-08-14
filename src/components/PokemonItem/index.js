@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import PokemonSprite from "../PokemonSprite"
+import Description from "./description";
+
+
 
 const PokemonItem = () => {
     const { name } = useParams();
@@ -7,9 +11,10 @@ const PokemonItem = () => {
     const [ types, setTypes ] = useState([]);
     const [ stats, setStats ] = useState([]);
     const [ abilities, setAbilities ] = useState([]);
-    const [ sprite, setSprite ] = useState({})
+    const [ species, setSpecies ] = useState({})
+   
 
-    const loadPokemon = async () => {
+    useEffect(() => {
         fetch('https://pokeapi.co/api/v2/pokemon/'+name)
             .then(response => response.json())
             .then(data => {
@@ -17,14 +22,9 @@ const PokemonItem = () => {
                 setTypes(data.types);
                 setStats(data.stats);
                 setAbilities(data.abilities);
-                setSprite(data.sprites.other.dream_world);
+                setSpecies(data.species);
             }
         )
-
-    }
-
-    useEffect(() => {
-        loadPokemon();
     }, [name]);
 
     return(
@@ -32,12 +32,14 @@ const PokemonItem = () => {
             <div className="container w-100">
                 <div className="row">
                     <div className="col-6">
-                        <div className="d-flex align-items-center justify-content-center">
-                            <img src={sprite.front_default} alt="pokemon sprite"/>
+                        <div 
+                            className="d-flex align-items-center justify-content-center"
+                        >
+                            <PokemonSprite url={species.url}/><br />
                         </div>
                     </div>
                     <div className="col-6">
-                        <h1 className="mr-3 text-capitalize">#{pokemon.order+' - '+pokemon.name}</h1>
+                        <h1 className="mr-3 text-capitalize">#{pokemon.id+' - '+pokemon.name}</h1>
                         <p className="text-secondary">
                             <strong className="mr-3">Weight: {pokemon.weight/100} Kg</strong>
                             <strong>Height: {pokemon.height/100} m</strong>
@@ -65,6 +67,12 @@ const PokemonItem = () => {
                                 </span>
                             ))}
                         </p>
+                        <div className="text-secondary">
+                            <h3>Description:</h3>
+                            <Description url={species.url} />
+                        </div>
+                    </div>
+                    <div className="col-12">
                         <table className="table table-bordered table-hover">
                             <thead>
                                 <tr>

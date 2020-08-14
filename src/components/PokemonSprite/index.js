@@ -4,22 +4,40 @@ import "./style.css"
 
 const PokemonSprite = (props) => {
     const [ sprite, setSprite ] = useState({});
-    const name = props.name;
+    const url = props.url;
 
-    useEffect(() => {
-        fetch('https://pokeapi.co/api/v2/pokemon/'+name)
+    function spriteFormSwitchable(id){
+        fetch("https://pokeapi.co/api/v2/pokemon/"+id)
             .then(response => response.json())
             .then(data => {
-                if(data.sprites.other.dream_world.front_default != null){
-                    setSprite(data.sprites.other.dream_world.front_default);
-                }else {
+                if(data.sprites.other.dream_world.front_default == null){
                     setSprite(data.sprites.front_default);
-                }                
+                }else {
+                    setSprite(data.sprites.other.dream_world.front_default);
+                } 
             }
         )
-    }, [name])
+    }
+
+    useEffect(() => {
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                if(data.forms_switchable === null){
+                    if(data.sprites.other.dream_world.front_default != null){
+                        setSprite(data.sprites.front_default);
+                    }else {
+                        setSprite(data.sprites.other.dream_world.front_default);
+                    } 
+                }else {
+                    spriteFormSwitchable(data.id);
+                }
+                               
+            }
+        )
+    }, [url]);
     return(
-        <div className="sprite-content">
+        <div style={{width: '100%', height: '100%'}}>
             <img src={sprite} alt="sprite" className="sprite"/>
         </div>
     )
