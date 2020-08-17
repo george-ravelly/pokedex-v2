@@ -5,9 +5,10 @@ import Footer from "../../components/Footer";
 import { Link } from "react-router-dom";
 
 function Home() {
-    const [ url, setUrl ] = useState('https://pokeapi.co/api/v2/pokemon?limit=3&offset=0');
+    const [ url, setUrl ] = useState('https://pokeapi.co/api/v2/pokemon-species/?limit=3&offset=0');
     const [ data, setData ] = useState({});
     const [ pokemonList, setPokemonList ] = useState([]);
+    const [ isLoading, setLoading ] = useState(false)
 
     useEffect(() => {
         fetch(url)
@@ -16,6 +17,7 @@ function Home() {
                 setData(data);
                 setPokemonList(data.results);
             })
+        setLoading(true)
     }, [url]);
 
     function handlerNext(){
@@ -35,36 +37,45 @@ function Home() {
     return(
         <main>
             <Header />
-            <div className="container bg-light mt-2 p-5 rounded">
-                <div className="row">
-                    {pokemonList.map(pokemon => (
-                        <div className="col-4 d-flex justify-content-center" key={pokemon.name}>
-                            <Link className="text-decoration-none" to={`/pokemon/${pokemon.name}`}>
-                                <div style={{width: '175px', height: '175px'}}>
-                                    <PokemonSprite url={pokemon.url}/><br />
-                                </div>
-                                <strong className="p-4 text-capitalize" style={{fontSize: '1.6rem'}}>
-                                    {pokemon.name}
-                                </strong>
-                            </Link>
-                        </div>
-                    ))}
+            {isLoading ? (
+                <div className="container bg-light mt-2 p-5 rounded">
+                    <div className="row">
+                        {pokemonList.map(pokemon => (
+                            <div className="col-md-4 col-12 d-flex justify-content-center" key={pokemon.name}>
+                                <Link className="text-decoration-none" to={`/pokemon/${pokemon.name}`}>
+                                    <div style={{width: '175px', height: '175px'}}>
+                                        <PokemonSprite url={pokemon.url}/><br />
+                                    </div>
+                                    <strong className="p-4 text-capitalize" style={{fontSize: '1.6rem'}}>
+                                        {pokemon.name}
+                                    </strong>
+                                </Link>
+                            </div>
+                        ))}
+                    </div>
+                    <div className="d-flex justify-content-between align-item-center mt-5">
+                        <button 
+                            className="btn btn-outline-secondary ml-5"
+                            onClick={() => handlerPrevious()}
+                        >
+                            Anterior
+                        </button>
+                        <button 
+                            className="btn btn-outline-primary mr-5"
+                            onClick={() => handlerNext()}
+                        >   
+                            Proximo
+                        </button>
+                    </div>
                 </div>
-                <div className="d-flex justify-content-between align-item-center mt-5">
-                    <button 
-                        className="btn btn-outline-secondary ml-5"
-                        onClick={() => handlerPrevious()}
-                    >
-                        Anterior
-                    </button>
-                    <button 
-                        className="btn btn-outline-primary mr-5"
-                        onClick={() => handlerNext()}
-                    >   
-                        Proximo
-                    </button>
+            ) : (
+                <div 
+                    className="spinner-border text-primary d-flex justify-content-center align-center" 
+                    role="status"
+                >
+                    <span className="sr-only">Loading...</span>
                 </div>
-            </div>
+            )}
             <Footer />
         </main>
     )
