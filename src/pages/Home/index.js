@@ -5,7 +5,7 @@ import Footer from "../../components/Footer";
 import { Link } from "react-router-dom";
 
 function Home() {
-    const [ url, setUrl ] = useState('https://pokeapi.co/api/v2/pokemon-species/?limit=3&offset=0');
+    const [ url, setUrl ] = useState('https://pokeapi.co/api/v2/pokemon-species/?limit=21&offset=0');
     const [ data, setData ] = useState({});
     const [ pokemonList, setPokemonList ] = useState([]);
     const [ isLoading, setLoading ] = useState(false)
@@ -41,7 +41,7 @@ function Home() {
                 <div className="container bg-light mt-2 p-5 rounded">
                     <div className="row">
                         {pokemonList.map(pokemon => (
-                            <div className="col-md-4 col-12 d-flex justify-content-center" key={pokemon.name}>
+                            <div className="col-md-4 col-12 mb-3 mb-md-1 d-flex justify-content-center" key={pokemon.name}>
                                 <Link className="text-decoration-none" to={`/pokemon/${pokemon.name}`}>
                                     <div style={{width: '175px', height: '175px'}}>
                                         <PokemonSprite url={pokemon.url}/><br />

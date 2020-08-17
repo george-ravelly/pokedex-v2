@@ -73,16 +73,11 @@ const PokemonInfo = () => {
                                 </div>
                             </div>
                             <div className="col-md-6 col-12">
-                                <h1 className="mr-3 text-capitalize">#{pokemon.id+' '+pokemon.name}</h1>
+                                <h1 className="mr-3 text-uppercase">#{pokemon.id+' '+pokemon.name}</h1>
                                 <p className="text-secondary">
-                                    <strong className="mr-3">Weight: {pokemon.weight/10} Kg</strong>
-                                    <strong>Height: {pokemon.height/10} m</strong>
-                                </p>
-                                <p className="text-secondary">
-                                    <strong>Types: </strong>
                                     {types.map(results => (
                                         <span 
-                                            className="mr-2 text-light rounded p-1" 
+                                            className="mr-2 text-light rounded p-1 text-uppercase font-weight-bold" 
                                             key={results.type.name}
                                             style={{background: `var(--color-${results.type.name})`}}
                                         >
@@ -90,18 +85,37 @@ const PokemonInfo = () => {
                                         </span>
                                     ))}
                                 </p>
-                                <p className="text-secondary">
-                                    <strong>Abilities: </strong>
-                                    {abilities.map(results => (
-                                        <span 
-                                            className="mr-2 text-capitalize"
-                                            key={results.ability.name}
-                                        >
-                                            {results.ability.name}
-                                        </span>
-                                    ))}
-                                </p>
                                 <div className="text-secondary">
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">Weight</th>
+                                                <td className="pl-2">{pokemon.weight/10}kg</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Height</th>
+                                                <td className="pl-2">{pokemon.height/10}m</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Capture Rate</th>
+                                                <td className="pl-2">{species.capture_rate}%</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Abilities</th>
+                                                <td className="pl-2">{abilities.map(results => (
+                                                        <span 
+                                                            className="mr-2 text-capitalize"
+                                                            key={results.ability.name}
+                                                        >
+                                                            {results.ability.name}
+                                                        </span>
+                                                    ))}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div className="text-secondary mt-2">
                                     <h3>Description:</h3>
                                     <p>{description}</p>
                                 </div>
@@ -126,14 +140,6 @@ const PokemonInfo = () => {
                                             </tr>
                                             
                                         ))}
-                                        <tr>
-                                            <th scope="row">Happiness</th>
-                                            <td>{species.base_happiness}</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Capture Rate</th>
-                                            <td>{species.capture_rate}</td>
-                                        </tr>
                                     </tbody>
                                 </table>
                             </div>

@@ -11,14 +11,17 @@ import "./style.css";
 function RegionListPokemon() {
     const { dex } = useParams();
     const [ pokemonList, setPokemonList ] = useState([]);
-    const [ pokedex, setPokedex ] = useState({});
+    const [ pokedex, setPokedex ] = useState('');
     const [ isLoading, setLoading ] = useState(false);
 
     useEffect(() => {
-        api.get('pokedex/'+dex).then(response => {
-            setPokedex(response.data);
-            setPokemonList(response.data.pokemon_entries)
-        })
+            api.get('pokedex/'+dex).then(response => {
+                setPokedex(response.data.name);
+                setPokemonList(response.data.pokemon_entries)
+            }).catch(err => {
+                console.log(err)
+            }) 
+    
         setLoading(true)
     }, [dex]);
 
@@ -30,7 +33,7 @@ function RegionListPokemon() {
                     <div className="d-flex justify-content-center">
                         <h1 className="text-dark text-capitalize">
                             <strong className="text-primary">#</strong>
-                            {pokedex.name}
+                            {pokedex}
                         </h1>
                     </div>
                     <div className="container mt-5">  
