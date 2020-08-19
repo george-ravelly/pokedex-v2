@@ -7,8 +7,27 @@ import { useState } from "react";
 
 const Header = () => {
     const [ types, setTypes ] = useState([]);
-    const [ isLoading, setLoading ] = useState(false)
+    const [ isLoading, setLoading ] = useState(false);
+    const [ search, setSearch ] = useState(null)
     const history = useHistory();
+
+    function searchPokemon(e){
+        e.preventDefault();
+        if(search === null){
+            return
+        }
+        fetch('http://pokeapi.co/api/v2/pokemon-species/'+search)
+            .then(response => response.json())
+            .then(data => {
+                if(data !== null){
+                    history.replace('/pokemon/'+search)
+                }
+            })
+            .catch(err => {
+                alert(`Pokemon ${search} não existe!!!`);
+                console.log(err)
+            })
+    }    
 
     useState(() => {
         fetch('http://pokeapi.co/api/v2/type')
@@ -33,7 +52,7 @@ const Header = () => {
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     <div className="collapse navbar-collapse" id="navbarNav">
-                        <ul className="navbar-nav mr-auto">
+                        <ul className="navbar-nav m-auto">
                             <li className="nav-item">
                                 <Link className="nav-link text-primary" to="/">Home</Link>
                             </li>
@@ -62,7 +81,7 @@ const Header = () => {
                             <li className="nav-item dropdown ml-md-3 ml-0">
                                 <a 
                                     className="btn btn-outline-primary dropdown-toggle" 
-                                    href="/" 
+                                    href="/types" 
                                     role="button" 
                                     id="dropType" 
                                     data-toggle="dropdown"
@@ -74,18 +93,19 @@ const Header = () => {
                                 {isLoading ? (
                                     <div className="dropdown-menu" aria-labelledby="dropType">
                                         {types.map(it => (
-                                            <Link 
-                                                className="nav-link text-primary" 
+                                            <span 
+                                                className="nav-link text-primary type" 
+                                                style={{cursor: 'pointer'}}
                                                 key={it.name} 
                                                 //Tentar corrigir o bug mais tarde
                                                 onClick={() => history.push('/types/'+it.name)}
                                             >
                                                 {it.name}
-                                            </Link>
+                                            </span>
                                         ))}                                
                                     </div>
                                 ) : (
-                                    <li className="d-none"></li>
+                                    <span>Loading...</span>
                                 )}
                                 
                             </li>
@@ -93,9 +113,16 @@ const Header = () => {
                     </div>
                 </nav>
                 <div className="container">
-                    <form className="form-inline my-2 my-lg-0 w-100">
+                    <form className="form-inline my-2 my-lg-0 w-100" onSubmit={searchPokemon}>
                         <label htmlFor="search" className="ml-2 text-primary">Search</label>
-                        <input className="form-control m-2 w-100" type="search" placeholder="ex: bulbasaur" aria-label="Search" name="search" />
+                        <input 
+                            onChange={e => setSearch(e.target.value)}
+                            className="form-control m-2 w-100" 
+                            type="search" 
+                            placeholder="ex: bulbasaur" 
+                            aria-label="Search" 
+                            name="search" 
+                        />
                     </form>
                 </div>
             </div>
