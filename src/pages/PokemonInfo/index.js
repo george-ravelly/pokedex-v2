@@ -3,26 +3,28 @@ import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import { useParams } from "react-router-dom";
 
-import Weaks from "./weaks.js";
+import Weaks from "../../components/PokeComponents/weaks.js";
+import Description from "../../components/PokeComponents/description";
 
 import "./style.css";
+import EvolutionChain from "../../components/PokeComponents/evolutionChain";
+
 
 const PokemonInfo = () => {
     const { name } = useParams();
     const [ pokemon, setPokemon ] = useState({});
     const [ species, setSpecies ] =  useState({});
+    const [ chain, setChain ] = useState('')
     const [ types, setTypes ] = useState([]);
     const [ stats, setStats ] = useState([]);
     const [ abilities, setAbilities ] = useState([]);
-    const [ description, setDescription ] = useState('');
     const [ sprite, setSprite ] = useState('');
     const [ isLoading, setLoading ] = useState(false);
-    const [ genus, setGenus ] = useState('');
     const [ egg, setEgg ] = useState([]);
     const [ growth, setGrowth ] = useState('');
     const [ habitat, setHabitat ] = useState({});
    
-    async function moreDetails(id){
+    function moreDetails(id){
         fetch('http://pokeapi.co/api/v2/pokemon/'+id)
             .then(response => response.json())
             .then(data => {
@@ -46,8 +48,8 @@ const PokemonInfo = () => {
             .then(response => response.json())
             .then(data => {
                 setSpecies(data);
+                setChain(data.evolution_chain.url)
                 moreDetails(data.id);
-                selectElements(data.flavor_text_entries, data.genera);
                 setEgg(data.egg_groups);
                 setGrowth(data.growth_rate.name);
                 setHabitat(data.habitat);
@@ -55,22 +57,6 @@ const PokemonInfo = () => {
         )
         setLoading(true)
     }, [name]);
-
-    function selectElements(flavors, genera){
-        for(let i = 0; i < flavors.length; i++){
-            if(flavors[i].language.name === 'en'){
-                setDescription(flavors[i].flavor_text);
-                break;
-            }
-        }
-        for(let i = 0; i < genera.length; i++){
-            if(genera[i].language.name === 'en'){
-                setGenus(genera[i].genus)
-                break
-            }
-        }
-    }
-
     return(
         <main>
             <Header />
@@ -154,10 +140,7 @@ const PokemonInfo = () => {
                                         </tbody>
                                     </table>
                                 </div>
-                                <div className="text-secondary mt-2">
-                                    <h3>{genus}</h3>
-                                    <p>{description}</p>
-                                </div>
+                                <Description name={name} />
                             </div>
                             <div className="col-12 mt-5">
                                 <table className="table table-bordered table-hover">
@@ -200,6 +183,16 @@ const PokemonInfo = () => {
                                     </tbody>                                    
                                 </table>
                             </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-12">
+                                <h4 className="p-3 text-dark rounded">Evolution Chain</h4>
+                            </div>
+                            {species.evolution_chain === null ? (
+                                <span className="text-secondary">Não possui evolução</span>
+                            ): (
+                                <EvolutionChain url={chain} />
+                            )}
                         </div>
                     </div>
                 </div>
