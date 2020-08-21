@@ -8,6 +8,7 @@ import Description from "../../components/PokeComponents/description";
 
 import "./style.css";
 import EvolutionChain from "../../components/PokeComponents/evolutionChain";
+import Moves from "../../components/PokeComponents/moves";
 
 
 const PokemonInfo = () => {
@@ -194,15 +195,26 @@ const PokemonInfo = () => {
                                 <EvolutionChain url={chain} />
                             )}
                         </div>
+                        <div className="row mt-5">
+                            {pokemon.id === undefined ? (
+                                <span className="text-secondary"></span>
+                            ): (
+                                <div className="col-12">
+                                    <Moves id={pokemon.id} />
+                                </div>
+                            )}
+                        </div>
                     </div>
                 </div>
 
             ) : (
-                <div 
-                    className="spinner-border text-primary d-flex justify-content-center align-center" 
-                    role="status"
-                >
-                    <span className="sr-only">Loading...</span>
+                <div className="row">
+                    <div 
+                        className="spinner-border text-primary d-flex justify-content-center align-center" 
+                        role="status"
+                    >
+                        <span className="sr-only">Loading...</span>
+                    </div>
                 </div>
             )}
             <Footer />

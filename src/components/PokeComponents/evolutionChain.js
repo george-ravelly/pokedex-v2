@@ -6,16 +6,34 @@ import PokemonSprite from "../PokemonSprite";
 
 const EvolutionChain = ({url}) => {
     const [ evolution, setEvolution ] = useState(null);
+    const [ not, setNot ] = useState(true);
 
     useEffect(() => {
         fetch(url)
             .then(response => response.json())
             .then(data => {
-                setEvolution({
-                    'first': data.chain.species.name, 
-                    'second': data.chain.evolves_to[0].species.name,
-                    'third': data.chain.evolves_to[0].evolves_to[0].species.name
-                })
+                const first =  data.chain.species.name;
+                if(data.chain.evolves_to[0] !== undefined){
+                    const second = data.chain.evolves_to[0].species.name;
+                    if(data.chain.evolves_to[0].evolves_to[0] !== undefined){
+                        const third = data.chain.evolves_to[0].evolves_to[0].species.name;
+                        setEvolution([
+                                {'sprite': first, 'trigger': true}, 
+                                {'sprite': second, 'trigger': true}, 
+                                {'sprite': third, 'trigger': false}
+                            ])  
+                        return;
+                    }else{
+                        setEvolution([
+                            {'sprite': first, 'trigger': true}, 
+                            {'sprite': second, 'trigger': false}
+                        ])
+                    }
+                    
+                }else {
+                    setNot(false)
+                    setEvolution(null)
+                }
             }).catch(err => {
                 console.log(err)
             })
@@ -23,34 +41,44 @@ const EvolutionChain = ({url}) => {
 
     
     return (
-        <div>
+        <div className="col-12">
             {evolution != null ? (
-                <div className="d-flex justify-content-between" style={{width: '100%'}}>
-                    <div className="col-2">
-                        <PokemonSprite url={'http://pokeapi.co/api/v2/pokemon-species/'+evolution.first} />
-                    </div>  
-                    <div className="col-1">
-                        <strong className="text-success" style={{fontSize: '4.5rem'}}>→</strong>
-                    </div>
-                    <div className="col-2">
-                        <PokemonSprite url={'http://pokeapi.co/api/v2/pokemon-species/'+evolution.second} />
-                    </div>  
-                    <div className="col-1">
-                        <strong className="text-success" style={{fontSize: '4.5rem'}}>→</strong>
-                    </div>
-                    <div className="col-2">
-                        <PokemonSprite url={'http://pokeapi.co/api/v2/pokemon-species/'+evolution.third} />
-                    </div> 
+                <div className="row">
+                    {evolution.map(result => (
+                        <div className="col-12 d-flex justify-content-center align-items-center" key={result.sprite}>
+                            {result.trigger ? (
+                                <div className="w-50 mb-3">
+                                    <div style={{width : '50%'}}>
+                                        <PokemonSprite url={'http://pokeapi.co/api/v2/pokemon-species/'+result.sprite} />                                  
+                                    </div>
+                                    <strong className="text-primary mt-2" style={{fontSize : '1.6rem'}}>Evolve to</strong>
+                                </div>
+                            ): (
+                                <div className="w-50">
+                                    <div style={{width : '50%'}}>
+                                        <PokemonSprite url={'http://pokeapi.co/api/v2/pokemon-species/'+result.sprite} />                                  
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    ))}  
                 </div>
             ) : (
-                <div 
-                    className="spinner-border text-primary d-flex justify-content-center align-center" 
-                    role="status"
-                >
-                    <span className="sr-only">Loading...</span>
+                <div className="col-12">
+                    {not ? (
+                        <div 
+                            className="d-flex justify-content-between align-items-center spinner-border text-primary" 
+                            role="status"
+                        >
+                            <span className="sr-only">Loading...</span>
+                        </div>
+                    ) : (
+                        <p className="col-12 text-secondary">
+                            Not Evolve
+                        </p>
+                    )}
                 </div>
-            )}
-                                   
+            )}                         
         </div>
     )
 }
