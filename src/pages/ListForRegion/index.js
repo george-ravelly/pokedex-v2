@@ -39,19 +39,15 @@ function RegionListPokemon() {
                     <div className="container mt-5">  
                         <div className="row">                  
                         {pokemonList.map(pokemon => (
-                            <div 
-                                className="d-flex justify-content-around col-md-4 col-12 col-sm-6 mb-5 pokemon-list" 
-                                key={pokemon.pokemon_species.name}
-                            >
-                                <div style={{width: '260px', height: '140px'}}>
-                                    <PokemonSprite url={pokemon.pokemon_species.url}/><br />
-                                </div>
-                                <div className="car-body">
-                                    <p className="card-title m-2 text-capitalize">
-                                        {pokemon.pokemon_species.name}<br />
-                                        <Link className="text-info" to={`/pokemon/${pokemon.pokemon_species.name}`}>info...</Link>
-                                    </p>
-                                </div>
+                            <div className="col-md-4 col-12 mb-3 mb-md-1 d-flex justify-content-center" key={pokemon.pokemon_species.name}>
+                                <Link className="text-decoration-none mb-3" to={`/pokemon/${pokemon.pokemon_species.name}`}>
+                                    <div style={{width: '175px', height: '175px'}}>
+                                        <PokemonSprite url={pokemon.pokemon_species.url}/><br />
+                                    </div>
+                                    <strong className="p-4 text-capitalize" style={{fontSize: '1.4rem'}}>
+                                        {pokemon.pokemon_species.name}
+                                    </strong>
+                                </Link>
                             </div>
                         ))}
                         </div>

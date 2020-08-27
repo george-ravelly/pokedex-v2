@@ -46,7 +46,7 @@ function Home() {
                                     <div style={{width: '175px', height: '175px'}}>
                                         <PokemonSprite url={pokemon.url}/><br />
                                     </div>
-                                    <strong className="p-4 text-capitalize" style={{fontSize: '1.6rem'}}>
+                                    <strong className="p-4 text-capitalize" style={{fontSize: '1.4rem'}}>
                                         {pokemon.name}
                                     </strong>
                                 </Link>
