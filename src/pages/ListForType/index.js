@@ -37,13 +37,13 @@ function ListForType() {
                     <div className="container mt-5">  
                         <div className="row">                  
                         {pokemonList.map(pokemon => (
-                            <div className="col-md-4 col-12 mb-3 mb-md-1 d-flex justify-content-center" key={pokemon.pokemon_species.name}>
-                                <Link className="text-decoration-none mb-3" to={`/pokemon/${pokemon.pokemon_species.name}`}>
+                            <div className="col-md-4 col-12 mb-3 mb-md-1 d-flex justify-content-center" key={pokemon.pokemon.name}>
+                                <Link className="text-decoration-none mb-3" to={`/pokemon/${pokemon.pokemon.name}`}>
                                     <div style={{width: '175px', height: '175px'}}>
-                                        <PokemonSprite url={pokemon.pokemon_species.url}/><br />
+                                        <PokemonSprite url={pokemon.pokemon.url}/><br />
                                     </div>
                                     <strong className="p-4 text-capitalize" style={{fontSize: '1.4rem'}}>
-                                        {pokemon.pokemon_species.name}
+                                        {pokemon.pokemon.name}
                                     </strong>
                                 </Link>
                             </div>
