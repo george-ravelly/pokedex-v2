@@ -52,13 +52,13 @@ const Header = () => {
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     <div className="collapse navbar-collapse" id="navbarNav">
-                        <ul className="navbar-nav m-auto">
+                        <ul className="navbar-nav" style={{'marginLeft':'102px'}}>
                             <li className="nav-item">
                                 <Link className="nav-link text-primary" to="/">Home</Link>
                             </li>
                             <li className="dropdown nav-item ml-md-2 ml-0">
                                 <a 
-                                    className="btn btn-outline-primary dropdown-toggle" 
+                                    className="btn dropdown-toggle text-primary border-0"
                                     href="/region/" 
                                     role="button" 
                                     id="dropRegion" 
@@ -80,7 +80,7 @@ const Header = () => {
                             </li>
                             <li className="nav-item dropdown ml-md-3 ml-0">
                                 <a 
-                                    className="btn btn-outline-primary dropdown-toggle" 
+                                    className="btn dropdown-toggle text-primary border-0" 
                                     href="/types" 
                                     role="button" 
                                     id="dropType" 
