@@ -11,7 +11,7 @@ const Moves = (props) => {
     const [ isLoading, setIsLoading ] = useState(false);
 
     useEffect(() => {
-        fetch('http://pokeapi.co/api/v2/pokemon/'+id)
+        fetch('https://pokeapi.co/api/v2/pokemon/'+id)
             .then(response => response.json())
             .then(data => {
                 const natural = data.moves.filter((el) => {

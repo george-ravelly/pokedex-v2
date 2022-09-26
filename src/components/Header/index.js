@@ -16,7 +16,7 @@ const Header = () => {
         if(search === null){
             return
         }
-        fetch('http://pokeapi.co/api/v2/pokemon-species/'+search)
+        fetch('https://pokeapi.co/api/v2/pokemon-species/'+search)
             .then(response => response.json())
             .then(data => {
                 if(data !== null){
@@ -30,7 +30,7 @@ const Header = () => {
     }    
 
     useState(() => {
-        fetch('http://pokeapi.co/api/v2/type')
+        fetch('https://pokeapi.co/api/v2/type')
             .then(response => response.json())
             .then(data => {
                 setTypes(data.results)
@@ -42,17 +42,17 @@ const Header = () => {
         <header>
             <div className="header-content">
                 <Link className="header text-decoration-none" to="/">
-                    Pokedéx
+                    Geodéx
                     <img src={pokeball} alt="pokebola"/>
                 </Link>
             </div>
             <div>
-                <nav className="navbar navbar-expand-lg navbar-light bg-light">
+                <nav className="navbar navbar-expand-lg" style={{backgroundColor: "#e3f2fd"}}>
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     <div className="collapse navbar-collapse" id="navbarNav">
-                        <ul className="navbar-nav" style={{'marginLeft':'102px'}}>
+                        <ul className="navbar-nav">
                             <li className="nav-item">
                                 <Link className="nav-link text-primary" to="/">Home</Link>
                             </li>
@@ -112,7 +112,7 @@ const Header = () => {
                         </ul>
                     </div>
                 </nav>
-                <div className="container">
+                <div className="container mt-4">
                     <form className="form-inline my-2 my-lg-0 w-100" onSubmit={searchPokemon}>
                         <label htmlFor="search" className="ml-2 text-primary">Search</label>
                         <input 

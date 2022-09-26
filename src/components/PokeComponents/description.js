@@ -7,7 +7,7 @@ const Description = ({name}) => {
     const [ description, setDescription ] = useState('');
 
     useEffect(() => {
-        fetch('http://pokeapi.co/api/v2/pokemon-species/'+name)
+        fetch('https://pokeapi.co/api/v2/pokemon-species/'+name)
             .then(response => response.json())
             .then(data => {
                 const text = data.genera.filter(el => {

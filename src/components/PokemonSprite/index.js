@@ -8,7 +8,7 @@ const PokemonSprite = (props) => {
     const [ isLoading, setLoading ] = useState(false)
 
     function selectSprite(id){
-        fetch('http://pokeapi.co/api/v2/pokemon/'+id)
+        fetch('https://pokeapi.co/api/v2/pokemon/'+id)
             .then(response => response.json())
             .then(data => {
                 if(data.sprites.other.dream_world.front_default == null){
@@ -16,6 +16,7 @@ const PokemonSprite = (props) => {
                 }else {
                     setSprite(data.sprites.other.dream_world.front_default);
                 }
+                setLoading(true)
             })
     }
 
@@ -28,7 +29,6 @@ const PokemonSprite = (props) => {
         ).catch(err => {
             console.log(err)
         })
-        setLoading(true)
     }, [url]);
 
 
@@ -37,11 +37,13 @@ const PokemonSprite = (props) => {
             {isLoading ? (
                 <img src={sprite} alt="sprite" className="sprite"/>
             ) : (
-                <div 
-                    className="spinner-border text-primary d-flex justify-content-center align-center" 
-                    role="status"
-                >
-                    <span className="sr-only">Loading...</span>
+                <div className="d-flex justify-content-center align-center">
+                    <div 
+                        className="spinner-border text-primary" 
+                        role="status"
+                    >
+                        <span className="sr-only">Loading...</span>
+                    </div>
                 </div>
             )}
         </div>

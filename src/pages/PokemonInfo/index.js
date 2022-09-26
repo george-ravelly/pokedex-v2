@@ -26,7 +26,7 @@ const PokemonInfo = () => {
     const [ habitat, setHabitat ] = useState({});
    
     function moreDetails(id){
-        fetch('http://pokeapi.co/api/v2/pokemon/'+id)
+        fetch('https://pokeapi.co/api/v2/pokemon/'+id)
             .then(response => response.json())
             .then(data => {
                 setPokemon(data);
@@ -45,7 +45,7 @@ const PokemonInfo = () => {
     }
 
     useEffect(() => {
-        fetch('http://pokeapi.co/api/v2/pokemon-species/'+name)
+        fetch('https://pokeapi.co/api/v2/pokemon-species/'+name)
             .then(response => response.json())
             .then(data => {
                 setSpecies(data);
@@ -54,9 +54,12 @@ const PokemonInfo = () => {
                 setEgg(data.egg_groups);
                 setGrowth(data.growth_rate.name);
                 setHabitat(data.habitat);
-            }
-        )
-        setLoading(true)
+            }).then(() => {
+                setLoading(true)
+            })
+            .catch(error => {
+                console.warn(error);
+            })
     }, [name]);
     return(
         <main>
