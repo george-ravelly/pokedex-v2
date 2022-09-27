@@ -20,11 +20,10 @@ header {
     transition: 0.4s;
 }
 
-.header-content .header:hover {
+/* .header-content .header:hover {
     color: gainsboro;
     opacity: 80%;
-    
-}
+} */
 
 .header-content .header img {
     width: 4.6rem;
