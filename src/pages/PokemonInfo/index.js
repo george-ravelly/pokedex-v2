@@ -188,25 +188,26 @@ const PokemonInfo = () => {
                                 </table>
                             </div>
                         </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-12">
-                            <h4 className="p-3 text-dark rounded">Evolution Chain</h4>
-                        </div>
-                        {species.evolution_chain === null ? (
-                            <span className="text-secondary">Não possui evolução</span>
-                        ): (
-                            <EvolutionChain url={chain} />
-                        )}
-                    </div>
-                    <div className="row mt-5">
-                        {pokemon.id === undefined ? (
-                            <span className="text-secondary"></span>
-                        ): (
-                            <div className="col-12">
-                                <Moves id={pokemon.id} />
+                        <div className="row">
+                            <div className="col-12 mb-5">
+                                <h4 className="p-3 text-dark rounded" style={{textAlign: "center"}}>Evolution Chain</h4>
                             </div>
-                        )}
+                            {species.evolution_chain === null ? (
+                                <span className="text-secondary">Does not evolve.</span>
+                            ): (
+                                <EvolutionChain url={chain} />
+                            )}
+                            <hr />
+                            <div className="col-12 container mt-5">
+                                {pokemon.id === undefined ? (
+                                    <span className="text-secondary"></span>
+                                ): (
+                                    <div className="col-12">
+                                        <Moves id={pokemon.id} />
+                                    </div>
+                                )}
+                            </div>
+                        </div>
                     </div>
                 </div>
 

@@ -47,15 +47,15 @@ const EvolutionChain = ({url}) => {
                     {evolution.map(result => (
                         <div className="col-12 d-flex justify-content-center align-items-center" key={result.sprite}>
                             {result.trigger ? (
-                                <div className="w-50 mb-3" style={{textAlign: 'center'}}>
-                                    <div style={{width : '50%'}}>
+                                <div className="w-50 mb-3 d-flex justify-content-center align-items-center" style={{textAlign: 'center'}}>
+                                    <div style={{width: '50%'}}>
                                         <PokemonSprite url={'https://pokeapi.co/api/v2/pokemon-species/'+result.sprite} />
                                         <strong className="text-primary mt-2" style={{fontSize : '1.6rem', textAlign: 'center'}}>Evolve to</strong>                                        
                                     </div>
                                 </div>
                             ): (
-                                <div className="w-50">
-                                    <div style={{width : '50%'}}>
+                                <div className="w-50 d-flex justify-content-center align-items-center">
+                                    <div style={{width: '50%'}}>
                                         <PokemonSprite url={'https://pokeapi.co/api/v2/pokemon-species/'+result.sprite} />                                  
                                     </div>
                                 </div>
