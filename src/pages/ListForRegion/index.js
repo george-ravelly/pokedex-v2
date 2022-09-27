@@ -16,7 +16,8 @@ function RegionListPokemon() {
 
     useEffect(() => {
             api.get('pokedex/'+dex).then(response => {
-                setPokedex(response.data.name);
+                console.log(response);
+                setPokedex(response.data.region.name);
                 setPokemonList(response.data.pokemon_entries)
             }).catch(err => {
                 console.log(err)

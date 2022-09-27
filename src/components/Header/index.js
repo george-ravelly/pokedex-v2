@@ -42,16 +42,16 @@ const Header = () => {
         <header>
             <div className="header-content">
                 <Link className="header text-decoration-none" to="/">
-                    Geodéx
+                    Geodex
                     <img src={pokeball} alt="pokebola"/>
                 </Link>
             </div>
             <div>
-                <nav className="navbar navbar-expand-lg" style={{backgroundColor: "#e3f2fd"}}>
+                <nav className="navbar navbar-expand-lg right" style={{backgroundColor: "#e3f2fd"}}>
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
                         <span className="navbar-toggler-icon"></span>
                     </button>
-                    <div className="collapse navbar-collapse" id="navbarNav">
+                    <div className="collapse navbar-collapse nav justify-content-center" id="navbarNav">
                         <ul className="navbar-nav">
                             <li className="nav-item">
                                 <Link className="nav-link text-primary" to="/">Home</Link>
@@ -70,12 +70,10 @@ const Header = () => {
                                 </a>
                                 <div className="dropdown-menu" aria-labelledby="dropRegion">
                                     <Link className="nav-link text-primary" to="/region/2">Kanto</Link>
-                                    <Link className="nav-link text-primary" to="/region/6">Jotho</Link>
+                                    <Link className="nav-link text-primary" to="/region/3">Jotho</Link>
                                     <Link className="nav-link text-primary" to="/region/4">Hoenn</Link>
                                     <Link className="nav-link text-primary" to="/region/5">Sinnoh</Link>
                                     <Link className="nav-link text-primary" to="/region/9">Unova</Link>
-                                    <Link className="nav-link text-primary" to="/region/12">Kalos</Link>
-                                    <Link className="nav-link text-primary" to="/region/21">Alola</Link>
                                 </div>
                             </li>
                             <li className="nav-item dropdown ml-md-3 ml-0">
@@ -94,9 +92,9 @@ const Header = () => {
                                     <div className="dropdown-menu" aria-labelledby="dropType">
                                         {types.map(it => (
                                             <span 
-                                                className="nav-link text-primary type" 
+                                                className="nav-link text-primary type text-capitalize" 
                                                 style={{cursor: 'pointer'}}
-                                                key={it.name} 
+                                                key={it.name}
                                                 //Tentar corrigir o bug mais tarde
                                                 onClick={() => history.push('/types/'+it.name)}
                                             >
