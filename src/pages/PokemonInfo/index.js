@@ -65,7 +65,7 @@ const PokemonInfo = () => {
         <main>
             <Header />
             {isLoading ? (
-                <div className="container mt-3 mb-3 bg-light p-5">
+                <div className="mt-3 mb-3 bg-light p-5">
                     <div className="container w-100">
                         <div className="row">
                             <div className="col-md-6 col-12">
@@ -91,7 +91,7 @@ const PokemonInfo = () => {
                                     ))}
                                 </p>
                                 <div className="text-secondary">
-                                    <table className="table table-borderless">
+                                    <table className="table table-borderless table-responsive">
                                         <tbody>
                                             <tr>
                                                 <th scope="row">Weight</th>
@@ -188,25 +188,25 @@ const PokemonInfo = () => {
                                 </table>
                             </div>
                         </div>
-                        <div className="row">
+                    </div>
+                    <div className="row">
+                        <div className="col-12">
+                            <h4 className="p-3 text-dark rounded">Evolution Chain</h4>
+                        </div>
+                        {species.evolution_chain === null ? (
+                            <span className="text-secondary">Não possui evolução</span>
+                        ): (
+                            <EvolutionChain url={chain} />
+                        )}
+                    </div>
+                    <div className="row mt-5">
+                        {pokemon.id === undefined ? (
+                            <span className="text-secondary"></span>
+                        ): (
                             <div className="col-12">
-                                <h4 className="p-3 text-dark rounded">Evolution Chain</h4>
+                                <Moves id={pokemon.id} />
                             </div>
-                            {species.evolution_chain === null ? (
-                                <span className="text-secondary">Não possui evolução</span>
-                            ): (
-                                <EvolutionChain url={chain} />
-                            )}
-                        </div>
-                        <div className="row mt-5">
-                            {pokemon.id === undefined ? (
-                                <span className="text-secondary"></span>
-                            ): (
-                                <div className="col-12">
-                                    <Moves id={pokemon.id} />
-                                </div>
-                            )}
-                        </div>
+                        )}
                     </div>
                 </div>
 
