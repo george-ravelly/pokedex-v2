@@ -64,7 +64,7 @@ const EvolutionChain = ({url}) => {
                     ))}  
                 </div>
             ) : (
-                <div className="col-12">
+                <div>
                     {not ? (
                         <div 
                             className="d-flex justify-content-between align-items-center spinner-border text-primary" 
@@ -73,9 +73,9 @@ const EvolutionChain = ({url}) => {
                             <span className="sr-only">Loading...</span>
                         </div>
                     ) : (
-                        <p className="col-12 text-secondary">
-                            Not Evolve
-                        </p>
+                        <h5 className="text-secondary" style={{textAlign: "center"}}>
+                            Does not evolve
+                        </h5>
                     )}
                 </div>
             )}                         

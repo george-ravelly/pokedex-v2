@@ -193,7 +193,7 @@ const PokemonInfo = () => {
                                 <h4 className="p-3 text-dark rounded" style={{textAlign: "center"}}>Evolution Chain</h4>
                             </div>
                             {species.evolution_chain === null ? (
-                                <span className="text-secondary">Does not evolve.</span>
+                                <span className="text-secondary" style={{textAlign: "center"}}>Does not evolve.</span>
                             ): (
                                 <EvolutionChain url={chain} />
                             )}
