@@ -165,7 +165,7 @@ const Header = () => {
                 <form className="form-inline my-2 my-lg-0 w-100" onSubmit={searchPokemon}>
                     <label htmlFor="search" className="ml-2 text-primary">Search</label>
                     <input 
-                        onChange={e => setSearch(e.target.value)}
+                        onChange={e => setSearch((e.target.value).toLowerCase())}
                         className="form-control m-2 w-100" 
                         type="search" 
                         placeholder="ex: bulbasaur" 
